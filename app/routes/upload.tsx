@@ -3,6 +3,7 @@ import { convertPdfToImage } from "lib/pdf2img";
 import { usePuterStore } from "lib/puter";
 import { generateUUID } from "lib/utils";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import FileUploader from "~/components/file-uploader";
 import Navbar from "~/components/navbar";
 
@@ -11,6 +12,7 @@ const Upload = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [statusText, setStatusText] = useState("");
   const [file, setFile] = useState<File | null>(null);
+  const navigate = useNavigate();
 
   const handleFileSelect = (file: File | null) => {
     setFile(file);
@@ -41,9 +43,10 @@ const Upload = () => {
 
     const uploadedImage = await fs.upload([imageFile.file]);
     if (!uploadedImage) return setStatusText("Error: Failed to upload image.");
-    setStatusText("Analyzing your resume...");
 
-    const uuid = generateUUID;
+    setStatusText("Preparing your data...");
+    const uuid = generateUUID();
+
     const data = {
       id: uuid,
       resumePath: uploadedFile.path,
@@ -75,6 +78,7 @@ const Upload = () => {
     setStatusText("Analysis complete, redirecting...");
 
     console.log("Analysis complete:", data);
+    navigate(`/resume/${uuid}`);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
