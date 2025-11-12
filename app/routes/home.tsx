@@ -35,7 +35,7 @@ export default function Home() {
       setLoadingResumes(false);
     };
     loadResumes();
-  }, [auth.isAuthenticated]);
+  }, []);
 
   return (
     <main className="bg-[url('/images/bg-main.svg')] bg-cover">
@@ -74,7 +74,7 @@ export default function Home() {
               to="/upload"
               className="primary-button w-fit text-xl font-semibold"
             >
-              Upload Your First Resume
+              Upload Resume
             </Link>
           </div>
         )}
