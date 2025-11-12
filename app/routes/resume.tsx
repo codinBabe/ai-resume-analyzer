@@ -1,7 +1,8 @@
 import { usePuterStore } from "lib/puter";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
-import type Details from "~/components/details";
+import ATS from "~/components/ats";
+import Details from "~/components/details";
 import Summary from "~/components/summary";
 
 export const meta = () => [
@@ -81,7 +82,7 @@ const Resume = () => {
               <Summary feedback={feedback} />
               <ATS
                 score={feedback.ATS.score || 0}
-                suggestion={feedback.ATS.tips || []}
+                suggestions={feedback.ATS.tips || []}
               />
               <Details feedback={feedback} />
             </div>
